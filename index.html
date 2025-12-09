@@ -1,9 +1,11 @@
 <html>
     <head>
         <title>chat using socket.io</title>
+        <link rel="stylesheet" href="jennchat.css">
     </head>
     <body>
-        <h1>WebChat by Jenn!</h1>
+        <div class="container">
+        <h1>Jenn Chat!</h1>
         <form id="form">
             <input id ="myname" placeholder="name" autocomplete="off" />
             <input id="message" placeholder="message" autocomplete="off" />
@@ -20,28 +22,34 @@
 
             form.addEventListener("submit", (e) => {
                 e.preventDefault();
-                if (message.value) {
-                    socket.emit("send name",myname.value);
-                    socket.emit("send message",message.value);
+                if (!myname.value.trim()) {
+                    alert("Please enter your name first!");
+                    return;
+                }
+                if (message.value.trim()) {
+                    socket.emit("send message", {
+                        name: myname.value,
+                        text: message.value
+                    });
                     message.value = "";
                 }
             });
+            socket.on("send message", data => {
+                let wrapper = document.createElement("div");
+                wrapper.style.marginBottom = "10px";
 
-            socket.on("send name", username => {
                 let name = document.createElement("p");
-                name.style.backgroundColor = "grey";
-                name.style.width = "100%";
-                name.style.textAlign = "center";
-                name.style.color = "white";
-                name.textContent = username + ":";
-                messageArea.appendChild(name);
-            });
-            socket.on("send message",(chat) => {
+                name.textContent = data.name + ":";
+
                 let chatContent = document.createElement("p");
-                chatContent.textContent = chat;
-                messageArea.appendChild(chatContent);
+                chatContent.textContent = data.text;
+
+                wrapper.appendChild(name);
+                wrapper.appendChild(chatContent);
+                messageArea.appendChild(wrapper);
                 window.scrollTo(0,document.body.scrollHeight);
-            })
+            });
         </script>
+        </div>
     </body>
 </html>
