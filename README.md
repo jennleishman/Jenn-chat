@@ -1,1 +1,6 @@
-# Chat-app
+# Jenn Chat!
+Jenn chat is an app I wrote using Node.js, express.js, socket.io. It is an online app hosted by Render, and can be accessed here: https://chat-app-fnr0.onrender.com/. Due to the free version of Render, it may time out and have to re-build upon you accessing it.
+
+To log on, just enter your name and send a message! Then, you can chat with any device also logged on.
+
+This is my final project for CS330. Find my Javascript/Node.js tutorial, also on my Github!
