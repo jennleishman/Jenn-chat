@@ -6,5 +6,5 @@ To log on, just enter your name and send a message! Then, you can chat with any 
 This is my final project for CS330. Find my Javascript/Node.js tutorial, also on my Github!
 
 *Two useful sources that I used:
-https://www.geeksforgeeks.org/node-js/how-to-create-a-chat-app-using-socket-io-node-js/
+https://www.geeksforgeeks.org/node-js/how-to-create-a-chat-app-using-socket-io-node-js/  
 https://socket.io/get-started/chat*
