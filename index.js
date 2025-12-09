@@ -5,16 +5,16 @@ const server = http.createServer(app);
 const { Server } = require("socket.io");
 const io = new Server(server);
 
+const path = require("path");
+app.use(express.static(path.join(__dirname)));
+
 app.get('/',(req,res) => {
     res.sendFile(__dirname + '/index.html');
 });
 
 io.on("connection", (socket) => {
-    socket.on("send name", (username) => {
-        io.emit("send name", username);
-    });
-    socket.on("send message", (chat) => {
-        io.emit("send message", chat);
+    socket.on("send message", (data) => {
+        io.emit("send message", data);
     });
 });
 
