@@ -14,21 +14,18 @@
         <div id = "messageArea"></div>
         <script src="/socket.io/socket.io.js"></script>
         <script>
-            let socket = io();
             let form = document.getElementById("form");
-            let myname = document.getElementById("myname");
             let message = document.getElementById("message");
             let messageArea =document.getElementById("messageArea");
+            let username = prompt("enter your name:");
+            let socket = io({
+                auth: { username: username.trim() }
+            });
 
             form.addEventListener("submit", (e) => {
                 e.preventDefault();
-                if (!myname.value.trim()) {
-                    alert("Please enter your name first!");
-                    return;
-                }
                 if (message.value.trim()) {
                     socket.emit("send message", {
-                        name: myname.value,
                         text: message.value
                     });
                     message.value = "";
@@ -49,6 +46,12 @@
                 messageArea.appendChild(wrapper);
                 window.scrollTo(0,document.body.scrollHeight);
             });
+
+            socket.on("user status", statusMsg => {
+                let status = document.createElement("p");
+                status.textContent = statusMsg;
+                message.Area.appendChild(status);
+            })
         </script>
         </div>
     </body>
