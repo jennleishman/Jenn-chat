@@ -15,7 +15,7 @@ app.get('/',(req,res) => {
 io.on("connection", (socket) => {
     const username = socket.handshake.auth.username;
     socket.username = username || "Anonymous";
-    socket.broadcast.emit("user status", socket.username + "has entered jenn-chat");
+    socket.broadcast.emit("user status", socket.username + " has entered jenn-chat");
     socket.on("send message", (data) => {
         io.emit("send message", {
             name: socket.username,
@@ -23,7 +23,7 @@ io.on("connection", (socket) => {
         });
     });
     socket.on("disconnect", () => {
-        socket.broadcast.emit("user status", socket.username + "has left jenn-chat");
+        socket.broadcast.emit("user status", socket.username + " has left jenn-chat");
     })
 });
 
